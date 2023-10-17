@@ -1,6 +1,10 @@
 import express from 'express'
+import mongoose from 'mongoose'
+
+mongoose.connect('mongodb://127.0.0.1:27017').then(() => console.log('以連接到mongodb'))
 
 const app = express()
+
 
 app.get('/', (req, res) => {
     res.send('歡迎來到首頁')
