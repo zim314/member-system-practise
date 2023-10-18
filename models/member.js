@@ -1,4 +1,4 @@
-import mongoose from 'mongoose;'
+import mongoose from 'mongoose';
 const { Schema } = mongoose;
 
 const memberSchema = new Schema({
@@ -8,5 +8,5 @@ const memberSchema = new Schema({
     age: {type: Number},
 });
 
-const Member = mongoose('member', memberSchema);
+const Member = mongoose.model('member', memberSchema);
 export default Member;
