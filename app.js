@@ -30,10 +30,20 @@ app.post('/create', async (req, res) => {
 
 app.get('/login', (req, res) => res.render('login'));
 
-app.post('/login', (req, res) => {
+app.post('/login', async (req, res) => {
     try {
         const { email, password } = req.body;
-        console.log(email, password);
+        const databaseUser = await member.findOne({email}).exec();
+        if( !databaseUser ) {
+            res.send('您尚未註冊');
+        } else {
+            const rightPassword = await bcrypt.compare(password, databaseUser.password);
+            if(rightPassword) {
+                res.send('登入成功');
+            } else {
+                res.send('密碼錯誤');
+            }
+        }
     } catch {  console.log('login錯誤') };
 });
 
